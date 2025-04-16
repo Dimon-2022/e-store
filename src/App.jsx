@@ -1,35 +1,89 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+const productData = [
+  {
+    name: "Laptop Pro",
+    description: "High-performance laptop for professionals.",
+    price: 1200,
+    photoName: "/laptop.png",
+    soldOut: false,
+  },
+  {
+    name: "Smartphone X",
+    description: "Latest model with stunning display.",
+    price: 800,
+    photoName: "/smartphone.png",
+    soldOut: false,
+  },
+  {
+    name: "Wireless Headphones",
+    description: "Noise-cancelling headphones with great sound quality.",
+    price: 200,
+    photoName: "/headphones.png",
+    soldOut: false,
+  },
+  {
+    name: "Smartwatch Z",
+    description: "Stylish smartwatch with fitness tracking features.",
+    price: 150,
+    photoName: "/smartwatch.png",
+    soldOut: false,
+  },
+  {
+    name: "Gaming Console",
+    description: "Powerful gaming console for endless fun.",
+    price: 400,
+    photoName: "/console.png",
+    soldOut: true,
+  },
+  {
+    name: "4K TV",
+    description: "Ultra HD television with vibrant colors.",
+    price: 1000,
+    photoName: "/tv.png",
+    soldOut: false,
+  },
+];
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      <Header />
+      <Catalog />
+      <Footer />
+    </div>
+  );
 }
 
-export default App
+function Header() {
+  return (
+    <header>
+      <h1>Electronic Store</h1>
+    </header>
+  );
+}
+
+function Catalog() {
+  return (
+    <main>
+      <ul>
+        <Product />
+        <Product />
+        <Product />
+        <Product />
+      </ul>
+    </main>
+  );
+}
+
+function Product() {
+  return <li>Product</li>;
+}
+
+function Footer() {
+  return (
+    <footer>
+      <p>© 2023 Electronic Store</p>
+    </footer>
+  );
+}
+
+export default App;
