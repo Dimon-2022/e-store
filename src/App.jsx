@@ -54,9 +54,38 @@ function App() {
 }
 
 function Header() {
+  const currentTime = new Date();
+  const hour = currentTime.getHours();
+  const openHours = 9; // Store opens at 9 AM
+  const closedHours = 21; // Store closes at 9 PM
+  
+  
+  const isOpen = (hour >= closedHours || hour < openHours) ? false : true;
+
   return (
     <header>
       <h1>Electronic Store</h1>
+      <nav>
+        <ul>
+          <li>
+            <a href="#home">Home</a>
+          </li>
+          <li>
+            <a href="#catalog">Catalog</a>
+          </li>
+          <li>
+            <a href="#about-us">About Us</a>
+          </li>
+          <li>
+            <a href="#contacts">Contacts</a>
+          </li>
+        </ul>
+      </nav>
+      {isOpen ? (
+        <p>We are currently open. Hours: {openHours}:00 - {closedHours}:00</p>
+      ) : (
+        <p>We are currently closed. Hours: {openHours}:00 - {closedHours}:00</p>
+      )}
     </header>
   );
 }
@@ -75,7 +104,19 @@ function Catalog() {
 }
 
 function Product() {
-  return <li>Product</li>;
+  const [laptop, ...other] = productData; // Example: using the first product for demonstration
+  const { name, description, price, photoName } = laptop;
+
+  return (
+    <li>
+      <img src={photoName} alt={name} />
+      <div>
+        <h3>{name}</h3>
+        <p>{description}</p>
+        <span>{price}</span>
+      </div>
+    </li>
+  );
 }
 
 function Footer() {
