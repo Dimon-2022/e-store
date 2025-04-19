@@ -1,3 +1,6 @@
+import "./index.css";
+
+const showFooter = true;
 const productData = [
   {
     name: "Laptop Pro",
@@ -45,11 +48,13 @@ const productData = [
 
 function App() {
   return (
-    <div>
+    <>
       <Header />
       <Catalog />
-      <Footer />
-    </div>
+      {/* <Footer year={2025} siteName="Electronic Store" /> */}
+      {/* {showFooter ? <Footer year={2025} siteName="Electronic Store" /> : null} */}
+      {showFooter && <Footer year={2025} siteName="Electronic Store" />}
+    </>
   );
 }
 
@@ -58,14 +63,13 @@ function Header() {
   const hour = currentTime.getHours();
   const openHours = 9; // Store opens at 9 AM
   const closedHours = 21; // Store closes at 9 PM
-  
-  
-  const isOpen = (hour >= closedHours || hour < openHours) ? false : true;
+
+  const isOpen = hour >= closedHours || hour < openHours ? false : true;
 
   return (
-    <header>
+    <header className="header">
       <h1>Electronic Store</h1>
-      <nav>
+      <nav className="nav">
         <ul>
           <li>
             <a href="#home">Home</a>
@@ -81,34 +85,38 @@ function Header() {
           </li>
         </ul>
       </nav>
-      {isOpen ? (
-        <p>We are currently open. Hours: {openHours}:00 - {closedHours}:00</p>
-      ) : (
-        <p>We are currently closed. Hours: {openHours}:00 - {closedHours}:00</p>
-      )}
+      <div className="working-hours">
+        {isOpen ? (
+          <p>
+            We are currently open. Hours: {openHours}:00 - {closedHours}:00
+          </p>
+        ) : (
+          <p>
+            We are currently closed. Hours: {openHours}:00 - {closedHours}:00
+          </p>
+        )}
+      </div>
     </header>
   );
 }
 
 function Catalog() {
   return (
-    <main>
-      <ul>
-        <Product />
-        <Product />
-        <Product />
-        <Product />
+    <main className="catalog">
+      <ul className="products">
+        {productData.map((item) => (
+          <Product prodObj={item} />
+        ))}
       </ul>
     </main>
   );
 }
 
-function Product() {
-  const [laptop, ...other] = productData; // Example: using the first product for demonstration
-  const { name, description, price, photoName } = laptop;
+function Product({ prodObj }) {
+  const { name, photoName, price, description, soldOut } = prodObj;
 
   return (
-    <li>
+    <li className="product">
       <img src={photoName} alt={name} />
       <div>
         <h3>{name}</h3>
@@ -119,10 +127,12 @@ function Product() {
   );
 }
 
-function Footer() {
+function Footer({ year, siteName }) {
   return (
-    <footer>
-      <p>© 2023 Electronic Store</p>
+    <footer className="footer">
+      <p>
+        © {year} {siteName}
+      </p>
     </footer>
   );
 }
